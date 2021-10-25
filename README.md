@@ -1,13 +1,15 @@
-# be-resourceful
+# be-resourceful [TODO]
 
 ```html
-<input be-resourceful='{
+<nav be-resourceful='{
     "URLPattern":{
         "protocol": "https",
         "pathname": "/foo/:test.html"
     },
-    "set":{
-        "value": "pathname.groups.test"
+    "transform":{
+        ":host": "...",
+        "input[-value]": "pathname.groups.test"
     }
 }'>
+</nav>
 ```
