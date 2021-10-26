@@ -11,3 +11,5 @@
     }
 }'>
 ```
+
+Limitations:  Only initializes value.  Doesn't listen for address changes.
