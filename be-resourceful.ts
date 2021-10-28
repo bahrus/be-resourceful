@@ -10,10 +10,9 @@ define<BeResourcefulProps & BeDecoratedProps, BeResourcefulActions>({
     config: {
         tagName,
         propDefaults:{
-            resource: '_self',
-            target: '_self',
-            URLPattern: {},
-            rootPath: ''
+            resources: [],
+            noParse: true,
+
         }
     }
 })

@@ -3,7 +3,7 @@
 Example 1: Single path
 
 ```html
-<nav be-resourceful="/foo/:view.html"></nav>
+<nav be-resourceful="/foo/:view"></nav>
 ```
 
 If appHistory.current is null (if available, else history.state?), and url:  https://my-site.com/foot/myFirstView.html is opened, sets current to {view: myFirstView}
