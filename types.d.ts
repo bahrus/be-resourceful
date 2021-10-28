@@ -1,5 +1,5 @@
 export interface BeResourcefulProps{
-
+    resources: Resource[];
 }
 
 export interface BeResourcefulActions{
