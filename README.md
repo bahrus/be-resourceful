@@ -26,8 +26,7 @@ Example 3:  Full Access to everything
             "resource": "myFrame",
             "target": "myOtherFrame",
             "resourcePath":"a.b.c",
-            "targetPath": "e.f.g",
-            "confirmDiff": true
+            "targetPath": "e.f.g"
         }
     ]
 }'></nav>
