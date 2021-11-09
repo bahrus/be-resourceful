@@ -36,8 +36,8 @@ export class BeResourcefulController implements BeResourcefulActions {
     onResources({proxy, resources}: this){
         for(const resource of resources!){
             const p = new URLPattern(resource.URLPatternInit);
-            const result = p.match(window.location);
-            
+            const result = p.exec(window.location);
+            console.log(result);
         }
     }
     createResource(path: string){
@@ -63,7 +63,8 @@ define<BeResourcefulProps & BeDecoratedProps, BeResourcefulActions>({
             noParse: true,
             ifWantsToBe,
             upgrade,
-            virtualProps: ['resources']
+            virtualProps: ['resources'],
+            intro: 'intro',
         },
         actions:{
             onResources:{
