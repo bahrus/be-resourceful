@@ -2,6 +2,7 @@ import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
 import {BeResourcefulProps, BeResourcefulVirtualProps, BeResourcefulActions, Resource} from './types';
 import {register} from 'be-hive/register.js';
 declare const URLPattern: any;
+
 export class BeResourcefulController implements BeResourcefulActions {
     intro(proxy: Element & BeResourcefulVirtualProps, target: Element, bdp: BeDecoratedProps) {
         //  Create Resources Array Virtual Prop based on ifWantsToBe Attribute
@@ -35,8 +36,15 @@ export class BeResourcefulController implements BeResourcefulActions {
     }
     onResources({proxy, resources}: this){
         for(const resource of resources!){
+            //for now, just use window
+            const aWin = window as any;
+            if(aWin.appHistory.entries.length > 0) continue;
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
+            if(result !== null){
+                aWin.appHistory.updateCurrent({state:{...result.pathname.groups}});
+            }
+            
             console.log(result);
         }
     }

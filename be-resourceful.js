@@ -34,8 +34,15 @@ export class BeResourcefulController {
     }
     onResources({ proxy, resources }) {
         for (const resource of resources) {
+            //for now, just use window
+            const aWin = window;
+            if (aWin.appHistory.entries.length > 0)
+                continue;
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
+            if (result !== null) {
+                aWin.appHistory.updateCurrent({ state: { ...result.pathname.groups } });
+            }
             console.log(result);
         }
     }
