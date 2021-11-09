@@ -1,4 +1,7 @@
-# be-resourceful [TODO]
+# be-resourceful
+
+be-resourceful initiates appHistory's state based on the current URL.
+
 
 Example 1: Single path
 
@@ -6,7 +9,7 @@ Example 1: Single path
 <nav be-resourceful="/foo/:view"></nav>
 ```
 
-If appHistory.current is null (if available, else history.state?), and url:  https://my-site.com/foot/myFirstView.html is opened, sets current to {view: myFirstView}
+If appHistory.entries.length is 0 (if available, else history.state?), and url:  https://my-site.com/foo/myFirstView is opened, sets appHistory.currentState to {view: myFirstView}
 
 Example 2:  Multiple paths
 
@@ -14,7 +17,7 @@ Example 2:  Multiple paths
 <nav be-resourceful='["foo/:view", "foo/:edit"]'></nav>
 ```
 
-Example 3:  Full Access to everything
+Example 3:  Full Access to everything [TODO]
 
 ```html
 <nav be-resourceful='{
@@ -29,9 +32,10 @@ Example 3:  Full Access to everything
             "targetPath": "e.f.g"
         }
     ],
-    "autogenerateLinks": true
 }'></nav>
 ```
+
+
 
 
 Limitations:  Only initializes value.  Doesn't listen for address changes.

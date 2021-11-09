@@ -21,5 +21,16 @@
     <script type=module>
         import '/be-resourceful.js';
     </script>
+    <iframe id=myIframe name=myIframeName src=blank.html></iframe>
+    <script>
+        myIframe.addEventListener('load', e => {
+            console.log(myIframe.readyState);
+        });
+        setTimeout(() => {
+            console.log(myIframe.contentWindow.appHistory.entries().length);
+            myIframe.contentWindow.appHistory.updateCurrent({state:{hello:'world'}});
+        }, 2000);
+        
+    </script>
 </body>
 </html>

@@ -45,7 +45,6 @@ export class BeResourcefulController implements BeResourcefulActions {
                 aWin.appHistory.updateCurrent({state:{...result.pathname.groups}});
             }
             
-            console.log(result);
         }
     }
     createResource(path: string){
