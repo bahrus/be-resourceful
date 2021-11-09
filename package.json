@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "web-dev-server --node-resolve --app-index demo/index.html --open"
   },
   "repository": {
     "type": "git",
@@ -17,7 +18,8 @@
   "devDependencies": {
     "xtal-test": "0.0.52",
     "@skypack/package-check": "0.2.2",
-    "@custom-elements-manifest/analyzer": "0.5.7"
+    "@custom-elements-manifest/analyzer": "0.5.7",
+    "@web/dev-server": "0.1.28"
   },
   "author": "",
   "license": "MIT",
