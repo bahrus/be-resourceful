@@ -28,7 +28,8 @@ Example 3:  Full Access to everything
             "resourcePath":"a.b.c",
             "targetPath": "e.f.g"
         }
-    ]
+    ],
+    "autogenerateLinks": true
 }'></nav>
 ```
 

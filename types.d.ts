@@ -1,15 +1,33 @@
+import {BeDecoratedProps} from 'be-decorated/types';
+
+export interface BeResourcefulVirtualProps{
+    resources?: Resource[];
+}
 export interface BeResourcefulProps{
-    resources: Resource[];
+    proxy: Element & BeResourcefulVirtualProps;
 }
 
 export interface BeResourcefulActions{
-
+    intro(proxy: Element & BeResourcefulVirtualProps, target: Element, bdp: BeDecoratedProps): void;
+    onResources(self: this): void;
 }
 
 export interface Resource{
-    URLPattern: any;
-    resource: string;
-    target: string;
-    resourcePath: string;
-    targetPath: string;
+    URLPatternInit: URLPatternInit;
+    resource?: string; // window to parse url
+    target?: string; // window to set state on
+    resourcePath?: string; // subsection of object to extract
+    targetPath?: string; // nested path where resource will be set
+}
+
+export interface URLPatternInit {
+    protocol?: string;
+    username?: string;
+    password?: string;
+    hostname?: string;
+    port?: string;
+    pathname?: string;
+    search?: string;
+    hash?: string;
+    baseURL?: string;
 }

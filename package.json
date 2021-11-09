@@ -11,12 +11,13 @@
     "url": "git+https://github.com/bahrus/be-resourceful.git"
   },
   "dependencies": {
-    "be-decorated": "0.0.33"
+    "be-decorated": "0.0.40",
+    "be-hive": "0.0.9"
   },
   "devDependencies": {
-    "xtal-test": "0.0.51",
+    "xtal-test": "0.0.52",
     "@skypack/package-check": "0.2.2",
-    "@custom-elements-manifest/analyzer": "0.5.6"
+    "@custom-elements-manifest/analyzer": "0.5.7"
   },
   "author": "",
   "license": "MIT",
