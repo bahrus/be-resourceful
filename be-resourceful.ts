@@ -31,6 +31,10 @@ export class BeResourcefulController implements BeResourcefulActions {
                 };
                 break;
         }
+        Object.assign(proxy, virtualProps);
+    }
+    onResources({proxy, resources}: this){
+
     }
     createResource(path: string){
         //  Create Resource
@@ -42,6 +46,8 @@ export class BeResourcefulController implements BeResourcefulActions {
         return resource;
     }
 }
+
+export interface BeResourcefulController extends BeResourcefulProps {}
 const tagName = 'be-resourceful';
 const ifWantsToBe = 'resourceful';
 const upgrade = '*';
@@ -54,6 +60,11 @@ define<BeResourcefulProps & BeDecoratedProps, BeResourcefulActions>({
             ifWantsToBe,
             upgrade,
             virtualProps: ['resources']
+        },
+        actions:{
+            onResources:{
+                ifAllOf: ['resources'],
+            }
         }
     },
     complexPropDefaults:{

@@ -3,7 +3,7 @@ import {BeDecoratedProps} from 'be-decorated/types';
 export interface BeResourcefulVirtualProps{
     resources?: Resource[];
 }
-export interface BeResourcefulProps{
+export interface BeResourcefulProps extends BeResourcefulVirtualProps{
     proxy: Element & BeResourcefulVirtualProps;
 }
 
