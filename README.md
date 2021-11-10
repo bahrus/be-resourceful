@@ -6,10 +6,32 @@ be-resourceful initiates appHistory's state based on the current URL.
 Example 1: Single path
 
 ```html
-<nav be-resourceful="/foo/:view"></nav>
+<nav be-resourceful="/foo/:view">
+    <a href=foo/myFirstView>My First View</a>
+    <a href=foo/mySecondView>My Second View</a>
+</nav>
 ```
 
-If appHistory.entries.length is 0 (if available, else history.state?), and url:  https://my-site.com/foo/myFirstView is opened, sets appHistory.currentState to {view: myFirstView}
+If appHistory.entries.length is 0 (final condition TBD), and url:  https://my-site.com/foo/myFirstView is opened, sets appHistory.currentState to:
+
+```JavaScript
+{
+    path: {
+        view: myFirstView
+    }
+}
+```
+
+Also, add attribute data-is-selected to first link, remove from second (if present).  So the DOM mutates to:
+
+```html
+<nav is-resourceful="/foo/:view">
+    <a href=foo/myFirstView data-is-selected>My First View</a>
+    <a href=foo/mySecondView>My Second View</a>
+</nav>
+```
+
+
 
 Example 2:  Multiple paths
 
@@ -19,23 +41,20 @@ Example 2:  Multiple paths
 
 Example 3:  Full Access to everything [TODO]
 
+
 ```html
 <nav be-resourceful='{
     "resources": [
         {
             "URLPattern":{
                 "pathname": "/foo/:view"
-            },
-            "resource": "myFrame",
-            "target": "myOtherFrame",
-            "resourcePath":"a.b.c",
-            "targetPath": "e.f.g"
+            }
         }
     ],
-}'></nav>
+}'>
+
+
+</nav>
 ```
 
 
-
-
-Limitations:  Only initializes value.  Doesn't listen for address changes.
