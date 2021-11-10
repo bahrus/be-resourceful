@@ -41,8 +41,21 @@ export class BeResourcefulController implements BeResourcefulActions {
             if(aWin.appHistory.entries.length > 0) continue;
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
+            const searchParams = new URLSearchParams(window.location.search);
+            const search: any = {};
+            for(const [key, value] of searchParams){
+                search[key] = value;
+            }
+            console.log(result);
             if(result !== null){
-                aWin.appHistory.updateCurrent({state:{...result.pathname.groups}});
+                aWin.appHistory.updateCurrent({
+                    state:{
+                        path: {
+                            ...result.pathname.groups
+                        },
+                        search
+                    }
+                });
             }
             
         }

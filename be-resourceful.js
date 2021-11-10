@@ -40,10 +40,22 @@ export class BeResourcefulController {
                 continue;
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
-            if (result !== null) {
-                aWin.appHistory.updateCurrent({ state: { ...result.pathname.groups } });
+            const searchParams = new URLSearchParams(window.location.search);
+            const search = {};
+            for (const [key, value] of searchParams) {
+                search[key] = value;
             }
             console.log(result);
+            if (result !== null) {
+                aWin.appHistory.updateCurrent({
+                    state: {
+                        path: {
+                            ...result.pathname.groups
+                        },
+                        search
+                    }
+                });
+            }
         }
     }
     createResource(path) {

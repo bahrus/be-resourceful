@@ -14,9 +14,9 @@ export interface BeResourcefulActions{
 
 export interface Resource{
     URLPatternInit: URLPatternInit;
-    resource?: string; // window to parse url
-    target?: string; // window to set state on
-    resourcePath?: string; // subsection of object to extract
+    // resource?: string; // window to parse url
+    // target?: string; // window to set state on
+    // resourcePath?: string; // subsection of object to extract
     targetPath?: string; // nested path where resource will be set
 }
 
