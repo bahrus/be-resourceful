@@ -43,9 +43,9 @@ export class BeResourcefulController implements BeResourcefulActions {
                 const anchor = target as HTMLAnchorElement;
                 const navResource = await getProxy(target.closest('nav')!, bdp.ifWantsToBe) as BeResourcefulVirtualProps;
                 for(const resource of navResource.resources!){
-                    const p = new URLPattern(resource.URLPatternInit);
-                    const result = p.exec(anchor.href);
-                    if(result !== null){
+                    //const p = new URLPattern(resource.URLPatternInit);
+                    //const result = p.exec(anchor.href);
+                    if(anchor.href === location.href){
                         anchor.dataset.isSelected = 'true';
                         
                     }else{
