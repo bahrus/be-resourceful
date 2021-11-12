@@ -1,6 +1,5 @@
 import { define } from 'be-decorated/be-decorated.js';
 import { register } from 'be-hive/register.js';
-import { getProxy } from 'be-observant/getProxy.js';
 export class BeResourcefulController {
     async intro(proxy, target, bdp) {
         //  Create Resources Array Virtual Prop based on ifWantsToBe Attribute
@@ -37,29 +36,15 @@ export class BeResourcefulController {
                     Object.assign(proxy, virtualProps);
                 }
                 break;
-            case 'a':
-                const anchor = target;
-                const navResource = await getProxy(target.closest('nav'), bdp.ifWantsToBe);
-                for (const resource of navResource.resources) {
-                    //const p = new URLPattern(resource.URLPatternInit);
-                    //const result = p.exec(anchor.href);
-                    if (anchor.href === location.href) {
-                        anchor.dataset.isSelected = 'true';
-                    }
-                    else {
-                        delete anchor.dataset.isSelected;
-                    }
-                }
-                break;
         }
     }
     onResources({ proxy, resources }) {
+        const aWin = window;
+        const appHistory = aWin.appHistory;
+        const current = appHistory.current?.getState();
+        if (current !== undefined && current.beResourceful !== undefined)
+            return;
         for (const resource of resources) {
-            //for now, just use window
-            const aWin = window;
-            const appHistory = aWin.appHistory;
-            if (appHistory.entries.length > 0)
-                continue;
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
             const searchParams = new URLSearchParams(window.location.search);
@@ -67,14 +52,17 @@ export class BeResourcefulController {
             for (const [key, value] of searchParams) {
                 search[key] = value;
             }
-            console.log(result);
             if (result !== null) {
+                console.log('updateCurrent');
                 aWin.appHistory.updateCurrent({
                     state: {
-                        path: {
-                            ...result.pathname.groups
-                        },
-                        search
+                        ...current,
+                        beResourceful: {
+                            path: {
+                                ...result.pathname.groups
+                            },
+                            search
+                        }
                     }
                 });
             }
@@ -92,7 +80,7 @@ export class BeResourcefulController {
 }
 const tagName = 'be-resourceful';
 const ifWantsToBe = 'resourceful';
-const upgrade = 'nav,a';
+const upgrade = 'nav';
 define({
     config: {
         tagName,

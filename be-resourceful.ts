@@ -39,29 +39,15 @@ export class BeResourcefulController implements BeResourcefulActions {
                 Object.assign(proxy, virtualProps);
             }
             break;
-            case 'a':
-                const anchor = target as HTMLAnchorElement;
-                const navResource = await getProxy(target.closest('nav')!, bdp.ifWantsToBe) as BeResourcefulVirtualProps;
-                for(const resource of navResource.resources!){
-                    //const p = new URLPattern(resource.URLPatternInit);
-                    //const result = p.exec(anchor.href);
-                    if(anchor.href === location.href){
-                        anchor.dataset.isSelected = 'true';
-                        
-                    }else{
-                        delete anchor.dataset.isSelected;
-                    }
-                }
-                break;
         }
 
     }
     onResources({proxy, resources}: this){
+        const aWin = window as any;
+        const appHistory = aWin.appHistory as AppHistory;
+        const current = appHistory.current?.getState() as any;
+        if(current !== undefined && current.beResourceful !== undefined) return;
         for(const resource of resources!){
-            //for now, just use window
-            const aWin = window as any;
-            const appHistory = aWin.appHistory as AppHistory;
-            if(appHistory.entries.length > 0) continue;
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
             const searchParams = new URLSearchParams(window.location.search);
@@ -69,14 +55,18 @@ export class BeResourcefulController implements BeResourcefulActions {
             for(const [key, value] of searchParams){
                 search[key] = value;
             }
-            console.log(result);
             if(result !== null){
+                console.log('updateCurrent');
                 aWin.appHistory.updateCurrent({
                     state:{
-                        path: {
-                            ...result.pathname.groups
-                        },
-                        search
+                        ...current,
+                        beResourceful:{
+                            path: {
+                                ...result.pathname.groups
+                            },
+                            search
+                        }
+
                     }
                 });
             }
@@ -97,7 +87,7 @@ export class BeResourcefulController implements BeResourcefulActions {
 export interface BeResourcefulController extends BeResourcefulProps {}
 const tagName = 'be-resourceful';
 const ifWantsToBe = 'resourceful';
-const upgrade = 'nav,a';
+const upgrade = 'nav';
 
 define<BeResourcefulProps & BeDecoratedProps, BeResourcefulActions>({
     config: {
