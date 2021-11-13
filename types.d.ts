@@ -2,6 +2,7 @@ import {BeDecoratedProps} from 'be-decorated/types';
 
 export interface BeResourcefulVirtualProps{
     resources?: Resource[];
+    updateFromURLPatternOnce?: boolean;
 }
 export interface BeResourcefulProps extends BeResourcefulVirtualProps{
     proxy: Element & BeResourcefulVirtualProps;

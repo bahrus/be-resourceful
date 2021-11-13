@@ -42,11 +42,11 @@ export class BeResourcefulController implements BeResourcefulActions {
         }
 
     }
-    onResources({proxy, resources}: this){
+    onResources({proxy, resources, updateFromURLPatternOnce}: this){
         const aWin = window as any;
         const appHistory = aWin.appHistory as AppHistory;
         const current = appHistory.current?.getState() as any;
-        if(current !== undefined && current.beResourceful !== undefined) return;
+        if(current !== undefined || (updateFromURLPatternOnce && current.beResourceful !== undefined)) return;
         for(const resource of resources!){
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
@@ -57,7 +57,7 @@ export class BeResourcefulController implements BeResourcefulActions {
             }
             if(result !== null){
                 console.log('updateCurrent');
-                aWin.appHistory.updateCurrent({
+                appHistory.updateCurrent({
                     state:{
                         ...current,
                         beResourceful:{
@@ -67,7 +67,8 @@ export class BeResourcefulController implements BeResourcefulActions {
                             search
                         }
 
-                    }
+                    },
+                    
                 });
             }
             

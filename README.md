@@ -1,8 +1,8 @@
 # be-resourceful [WIP]
 
-be-resourceful initializes appHistory's state based on the current URL and other queryable settings.
+be-resourceful initializes appHistory's state based on the current URL and other queryable settings and events.
 
-Some (perhaps a slim minority of) SPA's have seen the light, and look to history.state (and appHistory going forward) as a kind of "application uniter" -- a consistent location where key aspects of the application state can be found.  
+Some (perhaps a small minority of) SPA's have seen the light, and look to history.state (and appHistory going forward) as a kind of "application uniter" -- a consistent location where key aspects of the application state can be found.  
 
 The ability of deeply nested components to access this state means a large number of cases where "deep drilling of properties" is a problem is now solved.
 
@@ -56,9 +56,10 @@ Just to give an example of such an application, try opening:  https://www.msn.co
 }
 ```
 
-be-resourceful focuses on extracting the information needed to populate state from two locations:
+be-resourceful focuses on extracting the information needed to populate state from three locations:
 
 1.  The address bar, and 
+2.  Captured events from within the nav element.
 2.  Server rendered HTML.
 
 ## From the address bar
@@ -72,7 +73,7 @@ Example 1: Single path
 </nav>
 ```
 
-If appHistory.current.getState().beResourceful doesn't already exist, then currentState is appended with::
+If appHistory.current.getState().beResourceful doesn't already exist, then currentState is appended with:
 
 ```JavaScript
 {
@@ -95,7 +96,11 @@ Example 2:  Multiple paths
 <nav be-resourceful='["foo/:view", "foo/:edit"]'></nav>
 ```
 
-Example 3:  Full Access to everything [TODO]
+Example 3:  Capturing selected events from within the nav element.
+
+be-resourceful can work well with be-selectable, and transfer metadata from the selected hyperlink into appHistory.state.
+
+Example 4:  Full Access to everything [TODO]
 
 
 ```html
