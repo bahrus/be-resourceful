@@ -12,13 +12,17 @@ Example 1: Single path
 </nav>
 ```
 
-If appHistory.entries.length is 0 (final condition TBD -- maybe if neither cangoback or cangoforward?), and url:  https://my-site.com/foo/myFirstView is opened, sets appHistory.currentState to:
+If appHistory.current.getState().beResourceful doesn't already exist, then currentState is appended with::
 
 ```JavaScript
 {
-    path: {
-        view: myFirstView
+    ...otherStateFromOtherCode,
+    beResourceful:{
+        path: {
+            view: myFirstView
+        }
     }
+
 }
 ```
 
@@ -40,7 +44,8 @@ Example 3:  Full Access to everything [TODO]
         {
             "URLPattern":{
                 "pathname": "/foo/:view"
-            }
+            },
+            "rootPath": "be-resourceful",
         }
     ],
     "validation":{
