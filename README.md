@@ -1,7 +1,67 @@
-# be-resourceful
+# be-resourceful [WIP]
 
-be-resourceful initiates appHistory's state based on the current URL.
+be-resourceful initializes appHistory's state based on the current URL and other queryable settings.
 
+Some (perhaps a slim minority of) SPA's have seen the light, and look to history.state (and appHistory going forward) as a kind of "application uniter" -- a consistent location where key aspects of the application state can be found.  
+
+The ability of deeply nested components to access this state means a large number of cases where "deep drilling of properties" is a problem is now solved.
+
+The tricky thing, though, is that these enlightened applications have to think about two ways the state can get there:
+
+1.  Via navigation while the browser tab is open, or 
+2.  The user bookmarks the page, or shares the page with others, so now people directly jump straight to that view / link, bypassing the navigation steps that brought them there.
+
+So the question becomes how to encode this state in the application, and avoid doubling the effort to maintain state consistently?
+
+That is the purpose of be-resourceful, to help with that task.
+
+Just to give an example of such an application, try opening:  https://www.msn.com/en-us/news/coronavirus?ocid=msedgntp and inspecting history.state.  What you will see is:
+
+```JSON
+{
+    "display": "Coronavirus",
+    "id": "news-coronavirus",
+    "renderInfo": {
+        "renderType": 3,
+        "externalUrl": "https://www.msn.com/en-us/news/coronavirus",
+        "path": "news/coronavirus",
+        "usePathNameAsIs": true,
+        "context": {
+            "feedId": "Y_46cba2b4-26fd-492e-a1c0-41ec9917c10b"
+        },
+        "experienceConfigRef": {
+            "instanceId": "",
+            "configRef": {
+                "experienceType": "River",
+                "instanceSrc": "_hub-news-coronavirus-river-index-BB10Xdfl",
+                "sharedNs": "msn-ns"
+            }
+        }
+    },
+    "pageTitle": "Coronavirus (COVID-19)",
+    "verticalKey": "news",
+    "categoryKey": "coronavirus",
+    "destinationUrl": "https://www.msn.com/en-us/news/coronavirus?ocid=msedgntp",
+    "parentId": "news",
+    "telemetryMetadata": {
+        "n": "Coronavirus",
+        "a": "click",
+        "b": 1,
+        "d": "https://www.msn.com/en-us/news/coronavirus?ocid=msedgntp",
+        "f.i": "news-coronavirus",
+        "f.n": "Coronavirus",
+        "f.t": "category filter",
+        "c.hl": "Coronavirus"
+    }
+}
+```
+
+be-resourceful focuses on extracting the information needed to populate state from two locations:
+
+1.  The address bar, and 
+2.  Server rendered HTML.
+
+## From the address bar
 
 Example 1: Single path
 
