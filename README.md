@@ -96,9 +96,34 @@ Example 2:  Multiple paths
 <nav be-resourceful='["foo/:view", "foo/:edit"]'></nav>
 ```
 
-Example 3:  Capturing selected events from within the nav element. [WIP]
+Example 3:  Capturing selected events from within the nav element. 
 
 be-resourceful can work well with be-selectable, and transfer metadata from the selected hyperlink into appHistory.state.
+
+For example:
+
+```html
+    <nav be-resourceful=/demo/foo/:view>
+        <a href="/demo/foo/firstView" be-selectable data-test="hello">My First View</a>
+        <a href="/demo/foo/secondView" be-selectable>My Second View</a>
+    </nav>
+```
+
+shallow merges object:
+
+```JSON
+{
+    "beResourceful": {
+        "metadata": {
+            "test": "hello"
+        }
+    }
+}
+```
+
+into appHistory.current.getState().
+
+
 
 Example 4:  Full Access to everything [TODO]
 
