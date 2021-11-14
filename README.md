@@ -96,7 +96,7 @@ Example 2:  Multiple paths
 <nav be-resourceful='["foo/:view", "foo/:edit"]'></nav>
 ```
 
-Example 3:  Capturing selected events from within the nav element.
+Example 3:  Capturing selected events from within the nav element. [WIP]
 
 be-resourceful can work well with be-selectable, and transfer metadata from the selected hyperlink into appHistory.state.
 

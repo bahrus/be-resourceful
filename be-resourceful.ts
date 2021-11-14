@@ -77,6 +77,21 @@ export class BeResourcefulController implements BeResourcefulActions {
         if(selectable !== null){
             proxy.addEventListener(`${selectable.ifWantsToBe}::selected-changed`, e =>{
                 console.log(e);
+                if(!(e as CustomEvent).detail.value) return;
+                const current = appHistory.current?.getState() as any;
+                const beResourceful = current.beResourceful || {};
+                const dataset = (e.target! as HTMLElement).dataset;
+                const metadata = {} as any;
+                for(const key in dataset){
+                    metadata[key] = dataset[key];
+                }
+                beResourceful.metaData = metadata;
+                appHistory.updateCurrent({
+                    state:{
+                        ...current,
+                        beResourceful
+                    }
+                })
             }, {
                 capture: true,
             });

@@ -71,6 +71,22 @@ export class BeResourcefulController {
         if (selectable !== null) {
             proxy.addEventListener(`${selectable.ifWantsToBe}::selected-changed`, e => {
                 console.log(e);
+                if (!e.detail.value)
+                    return;
+                const current = appHistory.current?.getState();
+                const beResourceful = current.beResourceful || {};
+                const dataset = e.target.dataset;
+                const metadata = {};
+                for (const key in dataset) {
+                    metadata[key] = dataset[key];
+                }
+                beResourceful.metaData = metadata;
+                appHistory.updateCurrent({
+                    state: {
+                        ...current,
+                        beResourceful
+                    }
+                });
             }, {
                 capture: true,
             });
