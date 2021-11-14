@@ -38,11 +38,11 @@ export class BeResourcefulController {
                 break;
         }
     }
-    onResources({ proxy, resources }) {
+    onResources({ proxy, resources, updateFromURLPatternOnce }) {
         const aWin = window;
         const appHistory = aWin.appHistory;
         const current = appHistory.current?.getState();
-        if (current !== undefined && current.beResourceful !== undefined)
+        if (updateFromURLPatternOnce && current.beResourceful !== undefined)
             return;
         for (const resource of resources) {
             const p = new URLPattern(resource.URLPatternInit);
@@ -54,7 +54,7 @@ export class BeResourcefulController {
             }
             if (result !== null) {
                 console.log('updateCurrent');
-                aWin.appHistory.updateCurrent({
+                appHistory.updateCurrent({
                     state: {
                         ...current,
                         beResourceful: {
@@ -63,9 +63,17 @@ export class BeResourcefulController {
                             },
                             search
                         }
-                    }
+                    },
                 });
             }
+        }
+        const selectable = proxy.getRootNode().querySelector('be-selectable');
+        if (selectable !== null) {
+            proxy.addEventListener(`${selectable.ifWantsToBe}::selected-changed`, e => {
+                console.log(e);
+            }, {
+                capture: true,
+            });
         }
     }
     createResource(path) {

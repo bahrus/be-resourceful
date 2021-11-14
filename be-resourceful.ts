@@ -46,7 +46,7 @@ export class BeResourcefulController implements BeResourcefulActions {
         const aWin = window as any;
         const appHistory = aWin.appHistory as AppHistory;
         const current = appHistory.current?.getState() as any;
-        if(current !== undefined || (updateFromURLPatternOnce && current.beResourceful !== undefined)) return;
+        if(updateFromURLPatternOnce && current.beResourceful !== undefined) return;
         for(const resource of resources!){
             const p = new URLPattern(resource.URLPatternInit);
             const result = p.exec(window.location);
@@ -72,6 +72,14 @@ export class BeResourcefulController implements BeResourcefulActions {
                 });
             }
             
+        }
+        const selectable = (proxy.getRootNode() as Element).querySelector('be-selectable') as any;
+        if(selectable !== null){
+            proxy.addEventListener(`${selectable.ifWantsToBe}::selected-changed`, e =>{
+                console.log(e);
+            }, {
+                capture: true,
+            });
         }
     }
     createResource(path: string){
