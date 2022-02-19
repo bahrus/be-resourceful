@@ -12,9 +12,9 @@
     "url": "git+https://github.com/bahrus/be-resourceful.git"
   },
   "dependencies": {
-    "be-decorated": "0.0.79",
-    "be-hive": "0.0.28",
-    "be-observant": "0.0.94"
+    "be-decorated": "0.0.81",
+    "be-hive": "0.0.31",
+    "be-observant": "0.0.95"
   },
   "devDependencies": {
     "xtal-test": "0.0.55",

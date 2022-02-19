@@ -3,7 +3,6 @@ import {BeResourcefulProps, BeResourcefulVirtualProps, BeResourcefulActions, Res
 import {register} from 'be-hive/register.js';
 declare const URLPattern: any;
 import {AppHistory} from './appHistory';
-import {getProxy} from 'be-observant/getProxy.js';
 
 export class BeResourcefulController implements BeResourcefulActions {
     async intro(proxy: Element & BeResourcefulVirtualProps, target: Element, bdp: BeDecoratedProps) {
